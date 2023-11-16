@@ -6,7 +6,7 @@
 
 :root {
   --index: calc(1vw + 1vh);
-  --transition: cubic-bezier(.1, .7, 0, 1);
+  --transition: cubic-bezier(0.1, 0.7, 0, 1);
 }
 
 body {
@@ -14,15 +14,15 @@ body {
 }
 
 .wrapper {
-display: flex;
-align-items: center;
-justify-content: center;
-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .items {
   display: flex;
-  gap: .4rem;
+  gap: 0.4rem;
   perspective: calc(var(--index) * 35);
 }
 
@@ -33,12 +33,23 @@ height: 100vh;
   background-size: cover;
   background-position: center;
   cursor: pointer;
-  transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
+  transition: transform 1.25s var(--transition), filter 3s var(--transition),
+    width 1.25s var(--transition);
   will-change: transform, filter;
-  filter: grayscale() brightness(.5);
+  filter: grayscale() brightness(0.5);
 }
 
-.item::after, .item::before {
+.animate:hover {
+  transition-delay: .3s;
+  width: 28vw;
+  transform: translateZ(calc(var(--index) * 10));
+  filter: inherit;
+  z-index: 100;
+  margin: 0 0.45vw;
+}
+
+.item::after,
+.item::before {
   content: '';
   position: absolute;
   width: 20px;
@@ -60,7 +71,7 @@ height: 100vh;
 .items .item:hover + * {
   transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
   z-index: -1;
-  filter: inherit; 
+  filter: inherit;
 }
 
 .items .item:hover + * + * {
@@ -70,38 +81,43 @@ height: 100vh;
 }
 
 .items .item:hover + * + * + * {
-  transform: translateZ(calc(var(--index) * 2.4)) rotateY(35deg); 
+  transform: translateZ(calc(var(--index) * 2.4)) rotateY(35deg);
   z-index: -3;
 }
 
 .items .item:hover + * + * + * + * {
-  transform: translateZ(calc(var(--index) * .6)) rotateY(14deg);
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(14deg);
   z-index: -4;
 }
 
 /* left side */
 
 .item:has(+ :hover) {
-  transform: translateZ(calc(var(--index) * 8.5))  rotateY(-35deg);
+  transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
   filter: inherit;
 }
 
 .item:has(+ * + :hover) {
-  transform: translateZ(calc(var(--index) * 5.6))  rotateY(-40deg);
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
   filter: inherit;
 }
 
 .item:has(+ * + * + :hover) {
-  transform: translateZ(calc(var(--index) * 2.4))  rotateY(-35deg);
+  transform: translateZ(calc(var(--index) * 2.4)) rotateY(-35deg);
 }
 
 .item:has(+ * + * + * + :hover) {
-  transform: translateZ(calc(var(--index) * .6))  rotateY(-14deg);
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(-14deg);
 }
 
-.items .item:active, .items .item:focus {
-  width: 28vw;transform: translateZ(calc(var(--index) * 10));
+/* .items .item:focus {
+  width: 28vw;
+  transform: translateZ(calc(var(--index) * 10));
 	filter: inherit;
 	z-index: 100;
 	margin: 0 .45vw;
 }
+
+.items .item:active {
+  
+} */
